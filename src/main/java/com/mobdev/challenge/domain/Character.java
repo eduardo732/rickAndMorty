@@ -1,13 +1,11 @@
 package com.mobdev.challenge.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
+@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,9 +20,10 @@ public class Character {
     private String species;
     private String type;
     private Origin origin;
-    private Location location;
+    private LocationCharacter location;
     private String image;
-    private Episode episode;
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    private String[] episode;
     private String url;
     private String created;
 
