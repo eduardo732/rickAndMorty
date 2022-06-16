@@ -1,4 +1,4 @@
-package com.mobdev.challenge.helpers;
+package com.mobdev.challenge.infraestructure.rest.helpers;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

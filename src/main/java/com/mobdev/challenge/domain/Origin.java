@@ -1,4 +1,4 @@
-package com.mobdev.challenge.entity;
+package com.mobdev.challenge.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

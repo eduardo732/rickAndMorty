@@ -1,11 +1,11 @@
-package com.mobdev.challenge.service.impl;
+package com.mobdev.challenge.application.service.impl;
 
-import com.mobdev.challenge.entity.Character;
-import com.mobdev.challenge.entity.Location;
-import com.mobdev.challenge.mapper.ResponseMapper;
-import com.mobdev.challenge.service.ICharacterService;
-import com.mobdev.challenge.vo.GetOriginResponse;
-import com.mobdev.challenge.vo.GetRootResponse;
+import com.mobdev.challenge.domain.Character;
+import com.mobdev.challenge.domain.Location;
+import com.mobdev.challenge.infraestructure.rest.mapper.ResponseMapper;
+import com.mobdev.challenge.application.service.ICharacterService;
+import com.mobdev.challenge.infraestructure.rest.dto.GetOriginResponseDTO;
+import com.mobdev.challenge.infraestructure.rest.dto.GetRootResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -19,11 +19,11 @@ public class CharacterServiceImpl implements ICharacterService {
     @Autowired
     private WebClient webClient;
 
-    public GetRootResponse getResponse(Integer id) throws ExecutionException, InterruptedException {
+    public GetRootResponseDTO getResponse(Integer id) throws ExecutionException, InterruptedException {
         Character character = getCharacter(id);
         Location location = getLocation(character.getOrigin().getUrl());
-        GetOriginResponse getOriginResponse = ResponseMapper.responseOriginMapper(location);
-        return ResponseMapper.responseRootMapper(character, getOriginResponse);
+        GetOriginResponseDTO getOriginResponseDTO = ResponseMapper.responseOriginMapper(location);
+        return ResponseMapper.responseRootMapper(character, getOriginResponseDTO);
     }
     @Override
     public Character getCharacter(Integer id) throws ExecutionException, InterruptedException {

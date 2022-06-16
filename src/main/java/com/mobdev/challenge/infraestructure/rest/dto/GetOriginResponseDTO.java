@@ -1,4 +1,4 @@
-package com.mobdev.challenge.vo;
+package com.mobdev.challenge.infraestructure.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class GetOriginResponse {
+public class GetOriginResponseDTO {
     private String name;
     private String url;
     private String dimension;

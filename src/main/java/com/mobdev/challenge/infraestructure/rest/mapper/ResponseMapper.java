@@ -1,30 +1,30 @@
-package com.mobdev.challenge.mapper;
+package com.mobdev.challenge.infraestructure.rest.mapper;
 
-import com.mobdev.challenge.entity.Character;
-import com.mobdev.challenge.entity.Location;
-import com.mobdev.challenge.vo.GetOriginResponse;
-import com.mobdev.challenge.vo.GetRootResponse;
+import com.mobdev.challenge.domain.Character;
+import com.mobdev.challenge.domain.Location;
+import com.mobdev.challenge.infraestructure.rest.dto.GetOriginResponseDTO;
+import com.mobdev.challenge.infraestructure.rest.dto.GetRootResponseDTO;
 
 public class ResponseMapper {
 
-    public static GetRootResponse responseRootMapper(Character character, GetOriginResponse getOriginResponse) {
+    public static GetRootResponseDTO responseRootMapper(Character character, GetOriginResponseDTO getOriginResponseDTO) {
 
         int episodeCount = character.getEpisode().length;
 
-        return GetRootResponse.builder()
+        return GetRootResponseDTO.builder()
                     .id(character.getId())
                     .name(character.getName())
                     .status(character.getStatus())
                     .species(character.getSpecies())
                     .type(character.getType())
                     .episode_count(episodeCount)
-                    .origin(getOriginResponse)
+                    .origin(getOriginResponseDTO)
                     .build();
     }
 
-    public static GetOriginResponse responseOriginMapper(Location location) {
+    public static GetOriginResponseDTO responseOriginMapper(Location location) {
 
-        return GetOriginResponse.builder()
+        return GetOriginResponseDTO.builder()
                     .name(location.getName())
                     .url(location.getUrl())
                     .dimension(location.getDimension())

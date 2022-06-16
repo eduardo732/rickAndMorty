@@ -1,4 +1,4 @@
-package com.mobdev.challenge.controller;
+package com.mobdev.challenge.infraestructure.rest.controller;
 
 import com.mobdev.challenge.infraestructure.rest.helpers.Error;
 import com.mobdev.challenge.infraestructure.rest.helpers.GenericResponse;

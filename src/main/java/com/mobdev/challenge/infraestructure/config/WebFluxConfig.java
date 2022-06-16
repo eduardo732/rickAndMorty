@@ -1,4 +1,4 @@
-package com.mobdev.challenge.config;
+package com.mobdev.challenge.infraestructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.mobdev.challenge.vo;
+package com.mobdev.challenge.infraestructure.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GetRootResponse {
+public class GetRootResponseDTO {
 
     private Integer id;
     private String name;
@@ -19,6 +19,6 @@ public class GetRootResponse {
     private String type;
     private Integer episode_count;
     @JsonProperty("origin")
-    private GetOriginResponse origin;
+    private GetOriginResponseDTO origin;
 
 }

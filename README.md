@@ -16,15 +16,33 @@ Java versión 1.8. En mi caso utilicé Intellij IDEA como edito para crear y cor
 ### Explicación 🔧
 
     La arquitectura está formada de la siguiente manera:
-    -controllers: Donde se alojan las clases que controlan las peticiones y respuestas.
-    -entity: Donde se alojan las clases que representan las entidades abstractas.
-    -helpers: Donde se alojan las clases que serán de utilidad, 
-    ya sea para un manejo de respuestas, errores o lo que sea.
-    -mapper: Donde se alojan las clases que mappean peticiones o respuestas
-    -service: Donde se alojan las clases en las que se incluye la lógica de negocio
-    -vo: Donde se alojan las clases que le dan forma a las peticiones y respuestas
+    -domain: Se encuentran las clases de dominio como las entidades
+    -infraestructure: Será la responsable del funcionamiento del framework
+    ya sea para la gestion de errores, respuestas, crear beans y configuraciones
+    -application: La capa responsable de la lógica de negocio (Service, Repository, etc)
 
-En esta Api se utilizan patrones de diseño tales como DTO, DAO e ID.
+-En cuanto a la arquitectura, me basé en mis conocimientos previos de Clean architecture y decidí 
+utilizar una arquitectura hexagonal ya que se ve muy robusta en cuanto a un mantenimiento prolongado y testing.
+
+-Dentro del código se podrán encontrar patrones de diseño tales como DTO, DAO e ID.
+Al momento de ejecutar o probar el proyecto, se puede utilizar postman o incluso el navegador web
+apuntando a la siguiente url: http://localhost:8080/v1/character/{id} donde id es el numero identificador
+del personaje que va dentro del rango 1-826 incluyendo los limites según la documentación.
+
+-El formato de respuesta, cambia un poco con lo solicitado, ya que para un correcto manejo de errores
+tuve que crear una clase que pudiera manejar las respuestas obtenidas dentro de la api.
+
+Quedando de la siguiente manera:
+    
+    {
+    "errors": [],
+    "status": "",
+    "payload": ""
+    }
+
+Donde errors, trae consigo una lista de posibles errores que pueden ocurrir dentro de la api.
+status, donde lanza el mensaje de error correspondiente,
+y payload donde lanza la respuesta esperada por MobDev.
 
 
 
