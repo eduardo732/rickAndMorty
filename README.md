@@ -11,7 +11,7 @@ con Springboot, Patrones de Diseño, Arquitectura, etc.
 ### Instalación 🔧
 
 Para correr la api, basta con clonar el proyecto desde github, tener en su máquina
-Java versión 1.8. En mi caso utilicé Intellij IDEA como edito para crear y correr el proyecto.
+Java versión 1.8. En mi caso utilicé Intellij IDEA como editor para crear y correr el proyecto.
 
 ### Explicación 🔧
 
@@ -24,7 +24,7 @@ Java versión 1.8. En mi caso utilicé Intellij IDEA como edito para crear y cor
 -En cuanto a la arquitectura, me basé en mis conocimientos previos de Clean architecture y decidí 
 utilizar una arquitectura hexagonal ya que se ve muy robusta en cuanto a un mantenimiento prolongado y testing.
 
--Dentro del código se podrán encontrar patrones de diseño tales como DTO, DAO e ID.
+-Dentro del código se podrán encontrar patrones de diseño tales como DTO, ID.
 Al momento de ejecutar o probar el proyecto, se puede utilizar postman o incluso el navegador web
 apuntando a la siguiente url: http://localhost:8080/v1/character/{id} donde id es el numero identificador
 del personaje que va dentro del rango 1-826 incluyendo los limites según la documentación.
