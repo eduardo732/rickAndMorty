@@ -21,8 +21,9 @@ public class CharacterController {
     @Autowired
     private ICharacterService iCharacterService;
 
+
     @GetMapping(value = "/{id}")
-    public ResponseEntity<GenericResponse<?>> getCharacter(@PathVariable("id") Integer id) {
+    public ResponseEntity<GenericResponse<GetRootResponseDTO>> getCharacter(@PathVariable("id") Integer id) {
 
         GenericResponse<GetRootResponseDTO> response = new GenericResponse<GetRootResponseDTO>();
 
@@ -39,7 +40,7 @@ public class CharacterController {
         if (errors.size() > 0) {
             response.setErrors(errors);
             response.setStatus(HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<GenericResponse<?>>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<GenericResponse<GetRootResponseDTO>>(response, HttpStatus.BAD_REQUEST);
         }
 
         try {
@@ -50,10 +51,10 @@ public class CharacterController {
             errors.add(error);
             response.setErrors(errors);
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<GenericResponse<?>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<GenericResponse<GetRootResponseDTO>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return new ResponseEntity<GenericResponse<?>>(response, HttpStatus.OK);
+        return new ResponseEntity<GenericResponse<GetRootResponseDTO>>(response, HttpStatus.OK);
 
     }
 

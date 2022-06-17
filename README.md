@@ -45,7 +45,12 @@ status, donde lanza el mensaje de error correspondiente,
 y payload donde lanza la respuesta esperada por MobDev.
 
 
+### TESTING 🛠️
 
+En cuanto al testing, se realizó con JUnit y Mockito, bajo los conocimientos adquiridos autodidacticamente.
+Se testeó la capa de infraestructura especificamente el controller con su respectivo endpoint. 
+También se hizo un intentó de testing en la capa application especificamtene el service
+en donde por falta de tiempo y de conocimientos, no se pudo realizar de manera exitosa.
 
 ## Construido con 🛠️
 
