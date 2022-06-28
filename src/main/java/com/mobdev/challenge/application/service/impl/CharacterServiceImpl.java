@@ -6,44 +6,55 @@ import com.mobdev.challenge.infraestructure.rest.mapper.ResponseMapper;
 import com.mobdev.challenge.application.service.ICharacterService;
 import com.mobdev.challenge.infraestructure.rest.dto.GetOriginResponseDTO;
 import com.mobdev.challenge.infraestructure.rest.dto.GetRootResponseDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
-import java.util.concurrent.ExecutionException;
+import java.util.Optional;
 
 @Service
 public class CharacterServiceImpl implements ICharacterService {
 
-    @Autowired
-    private WebClient webClient;
 
-    public GetRootResponseDTO getResponse(Integer id) throws ExecutionException, InterruptedException {
-        Character character = getCharacter(id);
-        Location location = getLocation(character.getOrigin().getUrl());
-        GetOriginResponseDTO getOriginResponseDTO = ResponseMapper.responseOriginMapper(location);
-        return ResponseMapper.responseRootMapper(character, getOriginResponseDTO);
+    private final WebClient webClient;
+
+
+    public CharacterServiceImpl(WebClient webClient) {
+        this.webClient = webClient;
     }
+
     @Override
-    public Character getCharacter(Integer id) throws ExecutionException, InterruptedException {
+    public GetRootResponseDTO getResponse(Integer id) {
+        Optional<Character> character = Optional.ofNullable(getCharacter(id)
+                .orElseThrow(() -> new RuntimeException("Invalid Character's id")));
+        Optional<Location> location = Optional.ofNullable(getLocation(character.get().getOrigin().getUrl())
+                .orElseThrow(() -> new RuntimeException("Invalid origin")));
+        GetOriginResponseDTO getOriginResponseDTO = ResponseMapper.responseOriginMapper(location.get());
+        return ResponseMapper.responseRootMapper(character.get(), getOriginResponseDTO);
+    }
+
+    @Override
+    public Optional<Character> getCharacter(Integer id) {
         return webClient.get()
                 .uri("/character/" + id)
                 .retrieve()
                 .bodyToMono(Character.class)
                 .timeout(Duration.ofMillis(10_000))
-                .toFuture()
-                .get();
+                .onErrorResume(WebClientResponseException.NotFound.class, notFound -> Mono.empty())
+                .blockOptional();
+
     }
 
     @Override
-    public Location getLocation(String url) throws ExecutionException, InterruptedException {
+    public Optional<Location> getLocation(String url) {
         return webClient.get()
                 .uri(url)
                 .retrieve()
                 .bodyToMono(Location.class)
                 .timeout(Duration.ofMillis(10_000))
-                .toFuture()
-                .get();
+                .onErrorResume(WebClientResponseException.NotFound.class, notFound -> Mono.empty())
+                .blockOptional();
     }
 }
